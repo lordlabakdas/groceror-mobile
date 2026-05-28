@@ -1,9 +1,13 @@
 import { useEffect } from "react";
+import { StyleSheet } from "react-native";
 import { Stack, useRouter, useSegments } from "expo-router";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider, useAuth } from "../lib/auth-context";
 import { queryClient } from "../lib/query-client";
 import "../global.css";
+
+// Force dark mode — app is dark-only, matching the web app palette.
+StyleSheet.setFlag("darkMode", "class");
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
   const { user, ready } = useAuth();
