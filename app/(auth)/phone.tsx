@@ -9,7 +9,6 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { router } from "expo-router";
 import { apiRequest } from "../../lib/api";
 import { useAuth } from "../../lib/auth-context";
 
@@ -28,7 +27,7 @@ export default function PhoneScreen() {
       const res = await apiRequest("POST", "/user/login", { phone, password });
       const data = await res.json();
       await login(data.access_token);
-      router.replace("/(tabs)/browse");
+      // AuthGuard handles the redirect once user state updates
     } catch (e: any) {
       setError("Invalid phone or password");
     } finally {

@@ -10,7 +10,7 @@ import {
   Platform,
   ScrollView,
 } from "react-native";
-import { router, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { apiRequest } from "../../lib/api";
 import { useAuth } from "../../lib/auth-context";
 
@@ -45,7 +45,7 @@ export default function RegisterScreen() {
       });
       const data = await loginRes.json();
       await login(data.access_token);
-      router.replace("/(tabs)/browse");
+      // AuthGuard handles the redirect once user state updates
     } catch (e: any) {
       setError(e.message ?? "Registration failed");
     } finally {
