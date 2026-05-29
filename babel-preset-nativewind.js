@@ -1,15 +1,15 @@
-// Local wrapper for nativewind/babel that omits react-native-worklets/plugin.
-// That plugin is only needed for Reanimated 4 animated styles; this project
-// doesn't use Reanimated so we drop it to avoid the missing-module error.
+// Local wrapper for nativewind/babel (react-native-css-interop/babel).
+// The upstream includes "react-native-worklets/plugin" (Reanimated 4),
+// but we're on Reanimated 3.x so we use "react-native-reanimated/plugin" instead.
 module.exports = function () {
-  const cssInteropPlugin = require("react-native-css-interop/dist/babel-plugin").default;
   return {
     plugins: [
-      cssInteropPlugin,
+      require("react-native-css-interop/dist/babel-plugin").default,
       [
         require.resolve("@babel/plugin-transform-react-jsx"),
         { runtime: "automatic", importSource: "react-native-css-interop" },
       ],
+      require.resolve("react-native-reanimated/plugin"),
     ],
   };
 };
