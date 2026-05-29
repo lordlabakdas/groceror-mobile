@@ -4,12 +4,9 @@ module.exports = function (api) {
   return {
     presets: [
       ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+      // Use local wrapper instead of nativewind/babel to avoid react-native-worklets/plugin,
+      // which is only needed for Reanimated 4 and is not resolvable in Metro's transform worker.
+      ...(isTest ? [] : [require.resolve("./babel-preset-nativewind")]),
     ],
-    // Inline the two relevant parts of nativewind/babel (react-native-css-interop/babel)
-    // but omit "react-native-worklets/plugin" — it's only needed for Reanimated 4
-    // animated styles, which this project doesn't use.
-    plugins: isTest
-      ? []
-      : [require("react-native-css-interop/dist/babel-plugin").default],
   };
 };

@@ -13,6 +13,7 @@
     "expo-status-bar": "~2.0.0",
     "lucide-react-native": "^0.475.0",
     "nativewind": "^4.1.23",
+    "patch-package": "^8.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.5",
